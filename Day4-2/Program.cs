@@ -27,68 +27,22 @@ for (int x = 0; x < horizontalList[0].Length; x++)
     {
         char currentChar = horizontalList[y][x];
 
-        if (currentChar == 'X')
+        if (currentChar == 'A')
         {
 
             // check horizontal
 
-            int leftPoint = Math.Clamp(x - 3, 0, horizontalList[0].Length - 1);
-            int rightPoint = Math.Clamp(x + 3, 0, horizontalList[0].Length - 1);
-            string foundString = "";
-            for (int i = leftPoint; i <= rightPoint; i++)
-            {
-                foundString += horizontalList[y][i];
-            }
-            if (foundString.Contains("XMAS"))
-            {
-                totalOccurrences++;
-            }
-            if (foundString.Contains("SAMX"))
-            {
-                totalOccurrences++;
-            }
-
-
-            // check vertical
-            int topPoint = Math.Clamp(y - 3, 0, horizontalList.Count - 1);
-            int botPoint = Math.Clamp(y + 3, 0, horizontalList.Count - 1);
-            foundString = "";
-            for (int i = topPoint; i <= botPoint; i++)
-            {
-                foundString += horizontalList[i][x];
-            }
-            if (foundString.Contains("XMAS"))
-            {
-                totalOccurrences++;
-            }
-            if (foundString.Contains("SAMX"))
-            {
-                totalOccurrences++;
-            }
-
-            // Check Diagonal
 
 
 
-            int roomLeft = x - leftPoint;
-            int roomRight = rightPoint - x;
-            int roomTop = y - topPoint;
-            int roomBot = botPoint - y;
 
-            int roomTopLeft = Math.Min(roomTop, roomLeft);
-            int roomTopRight = Math.Min(roomTop, roomRight);
-            int roomBotLeft = Math.Min(roomBot, roomLeft);
-            int roomBotRight = Math.Min(roomBot, roomRight);
-
-
-
-            int startPointX = x - 3;
-            int startPointY = y - 3;
+            int startPointX = x - 1;
+            int startPointY = y - 1;
 
             // topLeft to BotRight
-            foundString = "";
+            string foundString = "";
 
-            for (int i = -3; i <= 3; i++)
+            for (int i = -1; i <= 1; i++)
             {
                 int xLocation = x + i;
                 int yLocation = y + i;
@@ -103,21 +57,25 @@ for (int x = 0; x < horizontalList[0].Length; x++)
 
 
             }
-            if (foundString.Contains("XMAS"))
+            bool foundMas = false;
+            if (foundString.Contains("MAS"))
             {
-                totalOccurrences++;
+                foundMas = true;
             }
-            if (foundString.Contains("SAMX"))
+            else if (foundString.Contains("SAM"))
             {
-                totalOccurrences++;
+                foundMas = true;
             }
+
+
+            if (!foundMas) continue; // no need to checkc other side if there is also no mas on the first diagonal line..
 
 
 
             // topLeft to BotRight
             foundString = "";
-
-            for (int i = -3; i <= 3; i++)
+            foundMas = false;
+            for (int i = -1; i <= 1; i++)
             {
                 int xLocation = x - i;
                 int yLocation = y + i;
@@ -132,15 +90,19 @@ for (int x = 0; x < horizontalList[0].Length; x++)
 
 
             }
-            if (foundString.Contains("XMAS"))
+            if (foundString.Contains("MAS"))
             {
-                totalOccurrences++;
+                foundMas = true;
             }
-            if (foundString.Contains("SAMX"))
+            else if (foundString.Contains("SAM"))
             {
-                totalOccurrences++;
+                foundMas = true;
             }
 
+            if (foundMas)
+            {
+                totalOccurrences++;
+            }
 
             //foundString = "";
             //for (int i = 0; i <= roomTopLeft + roomBotRight; i++)

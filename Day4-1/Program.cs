@@ -67,21 +67,6 @@ for(int x = 0; x < horizontalList[0].Length; x++)
             }
 
             // Check Diagonal
-
-
-
-            int roomLeft = x - leftPoint;
-            int roomRight = rightPoint - x;
-            int roomTop = y - topPoint;
-            int roomBot = botPoint - y;
-
-            int roomTopLeft = Math.Min(roomTop, roomLeft);
-            int roomTopRight = Math.Min(roomTop, roomRight);
-            int roomBotLeft = Math.Min(roomBot, roomLeft);
-            int roomBotRight = Math.Min(roomBot, roomRight);
-
-
-
             int startPointX = x - 3;
             int startPointY = y - 3;
 
